@@ -21,7 +21,7 @@ jobs:
           echo $GITHUB_REPOSITORY
           echo $GITHUB_WORKSPACE
           echo "${{ github.token }}"
-          echo git$github:$GITHUB_REPOSITORY
+          #echo git$github:$GITHUB_REPOSITORY
           # git clone git$github:$GITHUB_REPOSITORY
        - name: Dump github context
          env:
