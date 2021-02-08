@@ -1,0 +1,17 @@
+name: test workflow
+
+on:
+  repository_dispatch:
+    types: [build]
+
+
+jobs:
+  test-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run shell commands
+        run: |
+          pwd
+          ls -la
+          ps aux
+
