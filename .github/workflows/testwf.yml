@@ -10,8 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: payload
-        run: echo ${{ github.event.client_payload.device_type }}
-        run: echo ${{ github.event.client_payload.release_ver }}
+        run: |
+          echo ${{ github.event.client_payload.device_type }}
+          echo ${{ github.event.client_payload.release_ver }}
       - name: Run shell commands
         run: |
           pwd
