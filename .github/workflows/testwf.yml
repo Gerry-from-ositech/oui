@@ -23,5 +23,5 @@ jobs:
           echo "${{ github.token }}"
           echo git$github:$GITHUB_REPOSITORY
           # git clone git$github:$GITHUB_REPOSITORY
-      - name: Show file contents
-        run: cat 
+      #- name: Show file contents
+      #  run: cat 
