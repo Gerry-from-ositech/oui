@@ -24,16 +24,16 @@ jobs:
           echo git$github:$GITHUB_REPOSITORY
           # git clone git$github:$GITHUB_REPOSITORY
       - name: Dump github context
-         env:
+        env:
            GITHUB_CONTEXT: ${{ toJson(github) }}
-         run: echo "$GITHUB_CONTEXT"
+        run: echo "$GITHUB_CONTEXT"
       - name: Dump Job context
-         env:
+        env:
            JOB_CONTEXT: "$JOB_CONTEXT"
-         run: echo "$JOB_CONTEXT"
+        run: echo "$JOB_CONTEXT"
       - name: Dump Runner context
-         env:
+        env:
            RUNNER_CONTEXT: "$RUNNER_CONTEXT"
-         run: echo "$RUNNER_CONTEXT"
+        run: echo "$RUNNER_CONTEXT"
       #- name: Show file contents
       #  run: cat 
