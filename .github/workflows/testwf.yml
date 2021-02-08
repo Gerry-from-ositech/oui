@@ -30,11 +30,11 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
       - name: Dump Job context
         env:
-           JOB_CONTEXT: "$JOB_CONTEXT"
+           JOB_CONTEXT: ${{ toJson(job) }}
         run: echo "$JOB_CONTEXT"
       - name: Dump Runner context
         env:
-           RUNNER_CONTEXT: "$RUNNER_CONTEXT"
+           RUNNER_CONTEXT: ${{ toJson(runner) }}
         run: echo "$RUNNER_CONTEXT"
       #- name: Show file contents
       #  run: cat 
