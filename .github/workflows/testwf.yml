@@ -21,17 +21,17 @@ jobs:
           echo $GITHUB_REPOSITORY
           echo $GITHUB_WORKSPACE
           echo "${{ github.token }}"
-          #echo git$github:$GITHUB_REPOSITORY
+          echo git$github:$GITHUB_REPOSITORY
           # git clone git$github:$GITHUB_REPOSITORY
-       - name: Dump github context
+      - name: Dump github context
          env:
            GITHUB_CONTEXT: ${{ toJson(github) }}
          run: echo "$GITHUB_CONTEXT"
-       - name: Dump Job context
+      - name: Dump Job context
          env:
            JOB_CONTEXT: "$JOB_CONTEXT"
          run: echo "$JOB_CONTEXT"
-       - name: Dump Runner context
+      - name: Dump Runner context
          env:
            RUNNER_CONTEXT: "$RUNNER_CONTEXT"
          run: echo "$RUNNER_CONTEXT"
