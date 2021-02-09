@@ -10,9 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: payload
+        env:
+          THE_DEVICE_TYPE: ${{ github.event.client_payload.device_type }}
         run: |
           echo ${{ github.event.client_payload.device_type }}
           echo ${{ github.event.client_payload.release_ver }}
+          echo "$THE_DEVICE_TYPE"
       - name: Clone the repo
         uses: actions/checkout@v2
         with:
@@ -26,17 +29,28 @@ jobs:
           pwd
           ls -la
           cd docs
+          ls -la
           #ps aux
-          echo $GITHUB_SHA
+          #echo $GITHUB_SHA
           echo $GITHUB_REPOSITORY
           echo $GITHUB_WORKSPACE
-          echo "${{ github.token }}"
+          #echo "${{ github.token }}"
           echo git$github:$GITHUB_REPOSITORY
       - name: Cat out oui/docs/deplay.shell
-        run:
+        run: |
           ls -la
-          cat deplay.sh
+          cat deploy.sh
           git --version
+      - name: Some logic
+        run: |
+         echo ${{ github.event.client_payload.device_type }}
+         echo ${{ github.event.client_payload.release_ver }}
+         if [ $THE_DEVICE_TYPE" = "ivr" ]; then
+            echo "We have an IVR build"
+         else
+            echo "We have a IBU build"
+         fi
+
       #- name: Dump github context
       #  env:
       #     GITHUB_CONTEXT: ${{ toJson(github) }}
