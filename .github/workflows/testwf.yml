@@ -45,12 +45,44 @@ jobs:
         run: |
          echo ${{ github.event.client_payload.device_type }}
          echo ${{ github.event.client_payload.release_ver }}
-         if [ $THE_DEVICE_TYPE" = "ivr" ]; then
+         if [ ${{ github.event.client_payload.device_type }} = "IVR" ]; then
             echo "We have an IVR build"
          else
-            echo "We have a IBU build"
+            echo "We have an IBU build"
          fi
 
+      #- name: Set release name
+      #  run: echo ::set-env name=RELEASE_NAME::$(echo ${GITHUB_REF:11})
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+        #  tag_name: ${{ github.ref }}
+        #  release_name: ${{ env.RELEASE_NAME }}
+          tag_name: ${{ github.event.client_payload.release_ver }}
+          release_name: ${{ github.event.client_payload.release_ver }}
+          body_path: rel_notes.md
+      #    body: |
+      #      Changes in this release :
+      #        - First Change
+      #        - Second Change
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        run: echo ${{ steps.create_release.outputs.upload_url }}
+      #  id: upload-release-asset 
+      #  uses: actions/upload-release-asset@v1
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  with:
+      #    upload_url: ${{ steps.create_release.outputs.upload_url }}  
+      #    asset_path: ./lede-1701/bin/targets/ramips/mt7621/ivr-v1.0.0.sub2x-wg259.bin
+      #    asset_name: ivr-v1.0.0.sub2x-wg259.bin
+      #    asset_content_type: application/octet-stream
       #- name: Dump github context
       #  env:
       #     GITHUB_CONTEXT: ${{ toJson(github) }}
