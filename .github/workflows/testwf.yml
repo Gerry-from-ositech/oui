@@ -74,15 +74,16 @@ jobs:
 
       - name: Upload Release Asset
         run: echo ${{ steps.create_release.outputs.upload_url }}
-      #  id: upload-release-asset 
-      #  uses: actions/upload-release-asset@v1
-      #  env:
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #  with:
-      #    upload_url: ${{ steps.create_release.outputs.upload_url }}  
-      #    asset_path: ./lede-1701/bin/targets/ramips/mt7621/ivr-v1.0.0.sub2x-wg259.bin
-      #    asset_name: ivr-v1.0.0.sub2x-wg259.bin
-      #    asset_content_type: application/octet-stream
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}  
+        #  asset_path: ./lede-1701/bin/targets/ramips/mt7621/ivr-v1.0.0.sub2x-wg259.bin
+          asset_path: ./bin/targets/ramips/mt7621/ivr-v1.0.0.sub2x-wg259.bin
+          asset_name: ivr-v1.0.0.sub2x-wg259.bin
+          asset_content_type: application/octet-stream
       #- name: Dump github context
       #  env:
       #     GITHUB_CONTEXT: ${{ toJson(github) }}
