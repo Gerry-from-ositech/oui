@@ -13,7 +13,7 @@ jobs:
         run: |
           echo ${{ github.event.client_payload.device_type }}
           echo ${{ github.event.client_payload.release_ver }}
-      - name Clone the repo
+      - name: Clone the repo
         run:
           git clone --depth 1 git$github:$GITHUB_REPOSITORY
       - name: Run shell commands
