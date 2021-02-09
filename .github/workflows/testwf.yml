@@ -30,6 +30,7 @@ jobs:
           ls -la
           cd docs
           ls -la
+          cat deploy.sh
           #ps aux
           #echo $GITHUB_SHA
           echo $GITHUB_REPOSITORY
@@ -39,7 +40,6 @@ jobs:
       - name: Cat out oui/docs/deplay.shell
         run: |
           ls -la
-          cat deploy.sh
           git --version
       - name: Some logic
         run: |
