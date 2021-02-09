@@ -13,28 +13,36 @@ jobs:
         run: |
           echo ${{ github.event.client_payload.device_type }}
           echo ${{ github.event.client_payload.release_ver }}
+      - name Clone the repo
+        run:
+          git clone --depth 1 git$github:$GITHUB_REPOSITORY
       - name: Run shell commands
         run: |
           pwd
           ls -la
+          cd docs
           #ps aux
           echo $GITHUB_SHA
           echo $GITHUB_REPOSITORY
           echo $GITHUB_WORKSPACE
           echo "${{ github.token }}"
           echo git$github:$GITHUB_REPOSITORY
-          # git clone git$github:$GITHUB_REPOSITORY
-      - name: Dump github context
-        env:
-           GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Dump Job context
-        env:
-           JOB_CONTEXT: ${{ toJson(job) }}
-        run: echo "$JOB_CONTEXT"
-      - name: Dump Runner context
-        env:
-           RUNNER_CONTEXT: ${{ toJson(runner) }}
-        run: echo "$RUNNER_CONTEXT"
+      - name: Cat out oui/docs/deplay.shell
+        run:
+          ls -la
+          cat deplay.sh
+          git --version
+      #- name: Dump github context
+      #  env:
+      #     GITHUB_CONTEXT: ${{ toJson(github) }}
+      #  run: echo "$GITHUB_CONTEXT"
+      #- name: Dump Job context
+      #  env:
+      #     JOB_CONTEXT: ${{ toJson(job) }}
+      #  run: echo "$JOB_CONTEXT"
+      #- name: Dump Runner context
+      #  env:
+      #     RUNNER_CONTEXT: ${{ toJson(runner) }}
+      #  run: echo "$RUNNER_CONTEXT"
       #- name: Show file contents
       #  run: cat 
