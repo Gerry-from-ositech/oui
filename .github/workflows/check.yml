@@ -35,7 +35,7 @@ jobs:
         #      echo "File $FILE does not exist."
         #      echo '::set-output name=HAS_FILE::NO'
         #   fi
-        run: ls -l README.md
+        run: ls -l ./rel_notes.md
         #run: ls -l ./lede-1701/rel_notes.md  
         #if: failure()
       
