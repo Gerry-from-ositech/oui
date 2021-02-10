@@ -1,0 +1,51 @@
+name: test workflow
+
+on:
+  repository_dispatch:
+    types: [build]
+
+
+jobs:
+  test-workflow:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: payload
+        env:
+          THE_DEVICE_TYPE: ${{ github.event.client_payload.device_type }}
+        run: |
+          echo ${{ github.event.client_payload.device_type }}
+          echo ${{ github.event.client_payload.release_ver }}
+          echo "$THE_DEVICE_TYPE"
+      - name: Clone the repo
+        uses: actions/checkout@v2
+        with:
+          #repository: Ositech-Communications-Inc/OpenWRT-BSP
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+        #run:
+        #  git clone --depth 1 git$github:$GITHUB_REPOSITORY
+      - name: Check for release notes
+        id: check_rel_notes
+        run: |
+           FILE="./rel_notes"     
+           if [ -f $FILE ]; then
+               echo "File $FILE exists."
+               echo '::set-output name=HAS_FILE::YES'
+           else
+              echo "File $FILE does not exist."
+              echo '::set-output name=HAS_FILE::NO'
+           fi
+        #run: ls -l ./lede-1701/rel_notes.md  
+        #if: failure()
+      
+      - name: Check for failure
+        if: steps.check_rel_notes.HAS_FILE == 'NO'
+        run: |
+           echo "Aborting job - no rel_notes.md file!"
+           exit 1
+
+      - name: Run shell commands
+        run: |
+          echo "Did not abort job!"
+          pwd
+          ls -l
