@@ -7,7 +7,7 @@ on:
 
 jobs:
   test-workflow:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     steps:
       - name: payload
         env:
@@ -24,19 +24,20 @@ jobs:
 
         #run:
         #  git clone --depth 1 git$github:$GITHUB_REPOSITORY
+      - name: Check for release notes
+        id: check_rel_notes
+        #run: ls -l ./lede-1701/rel_notes.md    
+      - name: Check for failure
+        if: job.steps.check_rel_notes.status == failure() 
+        run: exit 1
+
       - name: Run shell commands
         run: |
           pwd
-          ls -la
-          cd docs
-          ls -la
-          cat deploy.sh
-          #ps aux
-          #echo $GITHUB_SHA
           echo $GITHUB_REPOSITORY
           echo $GITHUB_WORKSPACE
           #echo "${{ github.token }}"
-          echo git$github:$GITHUB_REPOSITORY
+          #echo git$github:$GITHUB_REPOSITORY
       - name: Cat out oui/docs/deplay.shell
         run: |
           ls -la
@@ -84,6 +85,11 @@ jobs:
           asset_path: ./bin/targets/ramips/mt7621/ivr-v1.0.0.sub2x-wg259.bin
           asset_name: ivr-v1.0.0.sub2x-wg259.bin
           asset_content_type: application/octet-stream
+      - name: Clean up by deleting rel_notes.md from remote repo
+        run: |
+          git rm --cached 'rel_notes.md'
+          git commit -m'removed rel_notes.md'
+          git push -u origin master
       #- name: Dump github context
       #  env:
       #     GITHUB_CONTEXT: ${{ toJson(github) }}
