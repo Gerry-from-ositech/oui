@@ -26,21 +26,24 @@ jobs:
         #  git clone --depth 1 git$github:$GITHUB_REPOSITORY
       - name: Check for release notes
         id: check_rel_notes
-        run: |
-           FILE="./rel_notes"     
-           if [ -f $FILE ]; then
-               echo "File $FILE exists."
-               echo '::set-output name=HAS_FILE::YES'
-           else
-              echo "File $FILE does not exist."
-              echo '::set-output name=HAS_FILE::NO'
-           fi
+        #run: |
+        #   FILE="./rel_notes"     
+        #   if [ -f $FILE ]; then
+        #       echo "File $FILE exists."
+        #       echo '::set-output name=HAS_FILE::YES'
+        #   else
+        #      echo "File $FILE does not exist."
+        #      echo '::set-output name=HAS_FILE::NO'
+        #   fi
+        run: ls -l ./rel_notes/md
         #run: ls -l ./lede-1701/rel_notes.md  
         #if: failure()
       
       - name: Check for failure
-        if: steps.check_rel_notes.HAS_FILE == 'NO'
+        #if: steps.check_rel_notes.HAS_FILE == 'NO'
+        if: ${{ failure() }}
         run: |
+           echo steps.check_rel_notes.HAS_FILE
            echo "Aborting job - no rel_notes.md file!"
            exit 1
 
