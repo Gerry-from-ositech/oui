@@ -29,7 +29,8 @@ jobs:
         run: ls -l rel_notes.md
         #run: ls -l ./lede-1701/rel_notes.md    
       - name: Check for failure
-        if: job.steps.check_rel_notes.status == failure() 
+        #if: job.steps.check_rel_notes.status == failure() 
+        if: failure()
         run: exit 1
 
       - name: Run shell commands
