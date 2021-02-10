@@ -91,6 +91,28 @@ jobs:
           git rm --cached 'rel_notes.md'
           git commit -m'removed rel_notes.md'
           git push -u origin master
+
+      - name: Send mail
+        if: success()
+        uses: dawidd6/action-send-mail@v2
+        with:
+           # mail server settings
+           server_address: smtp.gmail.com
+           server_port: 465
+           # user credentials
+           #username: ${{ secrets.EMAIL_USERNAME }}
+           #password: ${{ secrets.EMAIL_PASSWORD }}
+           username: "osidev.relay"
+           password: "Osi1Dev*01"
+           # email subject
+           subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+           # email body as text
+           body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
+           # comma-separated string, send email to
+           #to: johndoe@gmail.com,doejohn@gmail.com
+           to: gsutton@ositech.com
+           # from email name
+           from: Build System          
       #- name: Dump github context
       #  env:
       #     GITHUB_CONTEXT: ${{ toJson(github) }}
