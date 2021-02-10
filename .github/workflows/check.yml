@@ -35,7 +35,7 @@ jobs:
         #      echo "File $FILE does not exist."
         #      echo '::set-output name=HAS_FILE::NO'
         #   fi
-        run: ls -l ./rel_notes/md
+        run: ls -l README.md
         #run: ls -l ./lede-1701/rel_notes.md  
         #if: failure()
       
@@ -43,7 +43,7 @@ jobs:
         #if: steps.check_rel_notes.HAS_FILE == 'NO'
         if: ${{ failure() }}
         run: |
-           echo steps.check_rel_notes.HAS_FILE
+           #echo steps.check_rel_notes.HAS_FILE
            echo "Aborting job - no rel_notes.md file!"
            exit 1
 
