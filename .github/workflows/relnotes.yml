@@ -1,0 +1,55 @@
+name: test workflow
+
+on:
+  repository_dispatch:
+    types: [build]
+
+
+jobs:
+  test-workflow:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: payload
+        env:
+          THE_DEVICE_TYPE: ${{ github.event.client_payload.device_type }}
+        run: |
+          echo ${{ github.event.client_payload.device_type }}
+          echo ${{ github.event.client_payload.release_ver }}
+          echo "$THE_DEVICE_TYPE"
+
+      - name: Clone the repo
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+        #  tag_name: ${{ github.ref }}
+        #  release_name: ${{ env.RELEASE_NAME }}
+          tag_name: ${{ github.event.client_payload.release_ver }}
+          release_name: ${{ github.event.client_payload.release_ver }}
+        #  body_path: rel_notes.md
+          body: |
+            echo ${{ github.event.client_payload.release_notes }}
+          draft: false
+          prerelease: false
+
+      - name: Show target for asset to be loaded
+        run: echo ${{ steps.create_release.outputs.upload_url }}
+
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}  
+        #  asset_path: ./lede-1701/bin/targets/ramips/mt7621/ivr-v1.0.0.sub2x-wg259.bin
+          asset_path: ./bin/targets/ramips/mt7621/ivr-v1.0.0.sub2x-wg259.bin
+          asset_name: ivr-v1.0.0.sub2x-wg259.bin
+          asset_content_type: application/octet-stream
+
