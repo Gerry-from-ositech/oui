@@ -34,7 +34,7 @@ jobs:
           release_name: ${{ github.event.client_payload.release_ver }}
         #  body_path: rel_notes.md
           body: |
-            echo ${{ github.event.client_payload.release_notes }}
+            ${{ github.event.client_payload.release_notes }}
           draft: false
           prerelease: false
 
