@@ -21,12 +21,10 @@ jobs:
                 username: "osidev.relay"
                 password: "Osi1Dev*01"
                 # email subject
-                subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+                subject: New release available ${{ github.event.client_payload.release_file_name }}
                 # email body as text
                 body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
                 # comma-separated string, send email to
-                #to: johndoe@gmail.com,doejohn@gmail.com
-                #to: gsutton@ositech.com
                 to: ${{ github.event.client_payload.email_list }}
                 # from email name
-                from: Build System
+                from: Auto Build System
