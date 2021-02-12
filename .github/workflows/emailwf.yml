@@ -23,7 +23,9 @@ jobs:
                 # email subject
                 subject: New release available ${{ github.event.client_payload.release_file_name }}
                 # email body as text
-                body: Access release and read releas notes%0D%0Ahttps://github.com/Gerry-from-ositech/oui/releases/tag/v1.0.0.sub2x%0D%0A
+                body: |
+                   | Access release file and read releas notes
+                     https://github.com/Gerry-from-ositech/oui/releases/tag/v1.0.0.sub2x
                 # comma-separated string, send email to
                 to: ${{ github.event.client_payload.email_list }}
                 # from email name
