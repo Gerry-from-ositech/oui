@@ -24,7 +24,7 @@ jobs:
                 subject: New release available ${{ github.event.client_payload.release_file_name }}
                 # email body as text
                 body: |
-                   You can download the release file and read releas notes%0D%0A
+                   You can download the release file and read releas notes @ 
                    https://github.com/${{ github.repository }}/releases/tag/${{ github.event.client_payload.release_ver }}
                 # comma-separated string, send email to
                 to: ${{ github.event.client_payload.email_list }}
