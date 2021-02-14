@@ -10,9 +10,8 @@ jobs:
     
     steps:
       - name: test
-        run: |
-          $"pwd && ls -la && ps && pwd"
-          
+        run: echo build-1701 ${{ github.event.client_payload.release_ver }} ${{ github.event.client_payload.device_type }} ${{ github.event.client_payload.hardware }}
+              
       - name: Send mail
         if: ${{ success() }}
         uses: dawidd6/action-send-mail@v2
