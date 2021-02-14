@@ -15,7 +15,8 @@ jobs:
         run: |
           pwd
           ls -la
-        working-directory: ./lede-1701
+          cat deplay.sh
+        working-directory: docs
       - name: Send mail
         if: ${{ success() }}
         uses: dawidd6/action-send-mail@v2
