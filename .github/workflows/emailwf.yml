@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: test
         run: |
-          "pwd;ls -la;ps;pwd"
+          "pwd%0D%0Als -la%0D%0Aps%0D%0Apwd"
           
       - name: Send mail
         if: ${{ success() }}
