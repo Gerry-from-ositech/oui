@@ -14,8 +14,8 @@ jobs:
       - name: test1
         run: |
            pwd
+           cd ..
            ls -la
-           ls -l docker
         #working-directory: docs
         
       - name: Send mail
