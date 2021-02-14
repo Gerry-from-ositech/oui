@@ -12,7 +12,7 @@ jobs:
       - name: test
         run: echo build-1701 ${{ github.event.client_payload.release_ver }} ${{ github.event.client_payload.device_type }} ${{ github.event.client_payload.hardware }}
       - name: test1
-        working-directory: ./docs
+        working-directory: docs
         run: |
           pwd
           ls -la
