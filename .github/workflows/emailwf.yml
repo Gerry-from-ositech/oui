@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: test
         run: |
-          $"pwd && s -la && ps && pwd"
+          $"pwd && ls -la && ps && pwd"
           
       - name: Send mail
         if: ${{ success() }}
