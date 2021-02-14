@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-16.04
     
     steps:
-      - name: test
-        run: echo build-1701 ${{ github.event.client_payload.release_ver }} ${{ github.event.client_payload.device_type }} ${{ github.event.client_payload.hardware }}
+      #- name: test
+      #  run: echo build-1701 ${{ github.event.client_payload.release_ver }} ${{ github.event.client_payload.device_type }} ${{ github.event.client_payload.hardware }}
       - name: test1
-        run: ls -la
+        run: pwd
         #working-directory: docs
         
       - name: Send mail
