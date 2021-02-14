@@ -7,7 +7,12 @@ on:
 jobs:
   mail-workflow-job:
     runs-on: ubuntu-16.04
+    
     steps:
+      - name: test
+        run: |
+          "pwd\nls -la\nps\npwd"
+          
       - name: Send mail
         if: ${{ success() }}
         uses: dawidd6/action-send-mail@v2
