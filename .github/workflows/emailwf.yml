@@ -9,10 +9,14 @@ jobs:
     runs-on: ubuntu-16.04
     
     steps:
-      #- name: test
-      #  run: echo build-1701 ${{ github.event.client_payload.release_ver }} ${{ github.event.client_payload.device_type }} ${{ github.event.client_payload.hardware }}
+      - name: test
+        run: echo  ${{ github.event.client_payload.release_ver }} ${{ github.event.client_payload.device_type }} ${{ github.event.client_payload.hardware }}
         
-        
+      - name: nore tests
+        run: |
+           echo ${{ github.event.client_payload.email_list }}
+           ps aux
+            
       - name: Send mail
         if: ${{ success() }}
         uses: dawidd6/action-send-mail@v2
@@ -29,9 +33,8 @@ jobs:
                 subject: New release available ${{ github.event.client_payload.release_file_name }}
                 # email body as text
                 body: |
-                   You can download the release file and read releas notes @ 
-                   https://github.com/${{ github.repository }}/releases/tag/${{ github.event.client_payload.release_ver }}
+                   This is a test message from the oui workflow
                 # comma-separated string, send email to
-                to: ${{ github.event.client_payload.email_list }}
+                to: gsutton@ositech.com
                 # from email name
-                from: Auto Build System
+                from: OUI Workflow
